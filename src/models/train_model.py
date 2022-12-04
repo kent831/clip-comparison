@@ -17,8 +17,6 @@ test_data = CIFAR10(root="./data",train=False,transform=preprocess)
 train_dl = DataLoader(train_data,16,num_workers=2,pin_memory=True,shuffle=True)
 test_dl = DataLoader(test_data,16,num_workers=2,pin_memory=True)
 
-text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in test_data.classes]).to(device)
-
 def convert_models_to_fp32(model): 
     for p in model.parameters(): 
         p.data = p.data.float() 
@@ -44,7 +42,7 @@ for epoch in tqdm(range(EPOCH)):
         optimizer.zero_grad()
 
         images,label = batch 
-        texts = text_inputs
+        texts = torch.cat([clip.tokenize(f"a photo of a {test_data.classes[l]}") for l in label])
         
         images= images.to(device)
         texts = texts.to(device)
