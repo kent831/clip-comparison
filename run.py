@@ -11,6 +11,7 @@ import numpy as np
 import pytest
 import torch
 from PIL import Image
+from linear_probe import linear_probe
 
 import clip
 
@@ -21,6 +22,8 @@ def main(targets):
     targets must contain: 'data', 'analysis', 'model'. 
     
     '''
+    print(linear_probe("CIFAR10"))
+    print(linear_probe("CIFAR100"))
 
     if 'all' in targets:
         return 
@@ -42,7 +45,7 @@ def main(targets):
             py_probs = logits_per_image.softmax(dim=-1).cpu().numpy()
 
         assert np.allclose(jit_probs, py_probs, atol=0.01, rtol=0.1)
-
+        
     return
 
 
