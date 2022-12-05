@@ -12,17 +12,16 @@ LABEL maintainer="UC San Diego ITS/ETS <ets-consult@ucsd.edu>"
 
 # 2) change to root to install packages
 USER root
-
-RUN apt update 
-
-RUN apt-get -y install htop
+RUN apt update
+RUN apt-get -y install aria2 nmap traceroute
 
 # 3) install packages using notebook user
+# RUN useradd -ms /bin/bash kent831
 USER jovyan
 
 # RUN conda install -y scikit-learn
 
-RUN pip install --no-cache-dir ftfy regex tqdm torch torchvision
+RUN pip install --no-cache-dir clip torch numpy sklearn
 
 # Override command to disable running jupyter notebook at launch
 CMD ["/bin/bash"]
