@@ -51,4 +51,4 @@ def linear_probe(dataset):
     # Evaluate using the logistic regression classifier
     predictions = classifier.predict(test_features)
     accuracy = np.mean((test_labels == predictions).astype(np.float)) * 100.
-    return f"{dataset} Accuracy = {accuracy:.3f}"
+    return f"linear probe {dataset} Accuracy = {accuracy:.3f}"

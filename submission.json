@@ -1,5 +1,5 @@
 {
-"dockerhub-id": "gordonhu608/clip",
+"dockerhub-id": "kent831/clip",
 "build-script": "python run.py test"
 }
 
